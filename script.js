@@ -12,47 +12,17 @@ document.addEventListener("DOMContentLoaded", function () {
     terminal.open(document.getElementById("terminal-container"));
 
     terminal.writeln("Bienvenue sur mon terminal interactif !");
-    terminal.writeln("Tape 'info' pour accéder à plus d'informations.");
-    terminal.write("$ "); // Affiche le prompt initial
+    terminal.writeln("Voici le contenu de votre fichier 'info.html' :");
 
-    let currentInput = "";
-
-    terminal.onKey(e => {
-        const input = e.key;
-        const keyCode = e.keyCode; // Récupère le code de la touche
-
-        // Si la touche est "Enter", exécuter la commande
-        if (input === "Enter") {
-            const command = currentInput.trim();
-
-            terminal.writeln("");  // Ajouter une nouvelle ligne pour la sortie
-
-            if (command === "info") {
-                terminal.writeln("👉 Accédez à plus d'infos ici : https://mon-site.github.io/info");
-            } else if (command !== "") {
-                terminal.writeln("Commande inconnue. Essayez 'info'.");
-            }
-
-            // Réinitialiser l'entrée pour la prochaine commande
-            currentInput = "";
-            terminal.write("\r\n$ ");  // Réaffiche le prompt pour la prochaine commande
-        } 
-        // Si la touche est "Backspace" (keyCode 8), supprimer un caractère à gauche
-        else if (keyCode === 8) {
-            if (currentInput.length > 0) {
-                currentInput = currentInput.slice(0, -1);
-                terminal.write("\b \b");  // Supprimer visuellement le dernier caractère
-            }
-        } 
-        // Si la touche est "Delete" (keyCode 46), supprimer un caractère à droite
-        else if (keyCode === 46) {
-            if (currentInput.length > 0) {
-                currentInput = currentInput.slice(1);
-                terminal.write("\x1b[1P");  // Supprimer visuellement le premier caractère
-            }
-        } else {
-            currentInput += input;
-            terminal.write(input);  // Afficher le caractère dans le terminal
-        }
-    });
+    // Fonction pour charger le contenu de info.html
+    fetch('info.html')
+        .then(response => response.text())
+        .then(data => {
+            terminal.writeln(""); // Nouvelle ligne pour l'affichage du contenu
+            terminal.writeln(data);  // Insère le contenu de info.html dans le terminal
+        })
+        .catch(error => {
+            terminal.writeln("Erreur lors du chargement de info.html.");
+            console.error(error);
+        });
 });
