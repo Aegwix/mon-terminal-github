@@ -1,0 +1,14 @@
+body {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#terminal-container {
+    width: 80%;
+    height: 60vh;
+    border: 1px solid #ccc;
+}
