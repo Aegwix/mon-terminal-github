@@ -42,6 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentInput = currentInput.slice(0, -1);
                 terminal.write("\b \b");  // Supprimer visuellement le dernier caractère
             }
+        }
+        // Si la touche est "Delete", supprimer un caractère à droite du curseur
+        else if (input === "Delete") {
+            if (currentInput.length > 0) {
+                currentInput = currentInput.slice(1);
+                terminal.write("\x1b[1P");  // Supprimer visuellement le premier caractère (effacer à droite)
+            }
         } else {
             currentInput += input;
             terminal.write(input);  // Afficher le caractère dans le terminal
