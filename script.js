@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         else if (input === "Backspace") {
             if (currentInput.length > 0) {
                 currentInput = currentInput.slice(0, -1);
-                terminal.write("\b \b");  // Gérer visuellement la suppression du caractère
+                terminal.write("\b \b");  // Supprimer visuellement le dernier caractère
             }
         } else {
             currentInput += input;
