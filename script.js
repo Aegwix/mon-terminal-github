@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (command === "info") {
                 terminal.writeln("👉 Accédez à plus d'infos ici : https://mon-site.github.io/info");
-            } else {
+            } else if (command !== "") {
                 terminal.writeln("Commande inconnue. Essayez 'info'.");
             }
 
