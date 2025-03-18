@@ -38,8 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } 
         // Si la touche est "Backspace", supprimer un caractère de l'entrée
         else if (input === "Backspace") {
-            currentInput = currentInput.slice(0, -1);
-            terminal.write("\b \b");  // Gérer le backspace visuellement
+            if (currentInput.length > 0) {
+                currentInput = currentInput.slice(0, -1);
+                terminal.write("\b \b");  // Gérer visuellement la suppression du caractère
+            }
         } else {
             currentInput += input;
             terminal.write(input);  // Afficher le caractère dans le terminal
