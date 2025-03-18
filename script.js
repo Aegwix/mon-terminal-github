@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     terminal.onKey(e => {
         const input = e.key;
+        const keyCode = e.keyCode; // Récupère le code de la touche
 
         // Si la touche est "Enter", exécuter la commande
         if (input === "Enter") {
@@ -36,18 +37,18 @@ document.addEventListener("DOMContentLoaded", function () {
             currentInput = "";
             terminal.write("\r\n$ ");  // Réaffiche le prompt pour la prochaine commande
         } 
-        // Si la touche est "Backspace", supprimer un caractère de l'entrée
-        else if (input === "Backspace") {
+        // Si la touche est "Backspace" (keyCode 8), supprimer un caractère à gauche
+        else if (keyCode === 8) {
             if (currentInput.length > 0) {
                 currentInput = currentInput.slice(0, -1);
                 terminal.write("\b \b");  // Supprimer visuellement le dernier caractère
             }
-        }
-        // Si la touche est "Delete", supprimer un caractère à droite du curseur
-        else if (input === "Delete") {
+        } 
+        // Si la touche est "Delete" (keyCode 46), supprimer un caractère à droite
+        else if (keyCode === 46) {
             if (currentInput.length > 0) {
                 currentInput = currentInput.slice(1);
-                terminal.write("\x1b[1P");  // Supprimer visuellement le premier caractère (effacer à droite)
+                terminal.write("\x1b[1P");  // Supprimer visuellement le premier caractère
             }
         } else {
             currentInput += input;
